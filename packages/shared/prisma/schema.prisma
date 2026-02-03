@@ -1,0 +1,83 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  githubId        Int      @unique
+  login           String
+  email           String?
+  avatarUrl       String?
+  accessToken     String?  // Encrypted or hashed, if needed
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([githubId])
+  @@map("users")
+}
+
+model Installation {
+  id                    String   @id @default(cuid())
+  githubInstallationId  Int      @unique
+  accountLogin          String
+  accountType           String   // "User" or "Organization"
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  repos                 Repo[]
+
+  @@index([githubInstallationId])
+  @@map("installations")
+}
+
+model Repo {
+  id              String       @id @default(cuid())
+  githubRepoId    Int          @unique
+  owner           String
+  name            String
+  fullName        String       // owner/name
+  enabled         Boolean      @default(true)
+  installationId  String
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  installation    Installation @relation(fields: [installationId], references: [id], onDelete: Cascade)
+  runs            Run[]
+
+  @@index([githubRepoId])
+  @@index([installationId])
+  @@map("repos")
+}
+
+model Run {
+  id                      String   @id @default(cuid())
+  repoId                  String
+  prNumber                Int
+  prUrl                   String
+  prTitle                 String?
+  prHeadSha               String?
+  status                  String   // "queued" | "running" | "success" | "fail" | "ignored"
+  summaryMarkdown         String?  @db.Text
+  docsChecklistMarkdown   String?  @db.Text
+  suggestedPatchMarkdown  String?  @db.Text
+  confidence              String?  // "high" | "medium" | "low"
+  evidence                String[] // array of file paths or short references
+  errorMessage            String?  @db.Text
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  repo                    Repo     @relation(fields: [repoId], references: [id], onDelete: Cascade)
+
+  @@index([repoId])
+  @@index([prNumber])
+  @@index([createdAt])
+  @@map("runs")
+}

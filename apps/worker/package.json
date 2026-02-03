@@ -1,0 +1,26 @@
+{
+    "name": "@livedoc-sync/worker",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "lint": "eslint src --ext .ts"
+    },
+    "dependencies": {
+        "@livedoc-sync/shared": "workspace:*",
+        "@octokit/rest": "^20.0.2",
+        "@octokit/auth-app": "^6.0.3",
+        "bullmq": "^5.2.0",
+        "dotenv": "^16.4.1",
+        "ioredis": "^5.3.2",
+        "openai": "^4.26.0",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.10",
+        "tsx": "^4.7.0",
+        "typescript": "^5.3.3"
+    }
+}
