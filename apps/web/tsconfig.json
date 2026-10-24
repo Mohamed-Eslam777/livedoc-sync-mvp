@@ -1,34 +1,37 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "target": "ES2022",
-        "lib": [
-            "ES2022",
-            "DOM",
-            "DOM.Iterable"
-        ],
-        "jsx": "preserve",
-        "module": "esnext",
-        "moduleResolution": "bundler",
-        "incremental": true,
-        "paths": {
-            "@/*": [
-                "./src/*"
-            ]
-        },
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ]
-    },
-    "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx",
-        ".next/types/**/*.ts"
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
     ],
-    "exclude": [
-        "node_modules"
-    ]
+    "jsx": "preserve",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "incremental": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "allowJs": true,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

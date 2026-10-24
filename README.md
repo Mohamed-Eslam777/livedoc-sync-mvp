@@ -54,7 +54,7 @@ cd infra
 docker-compose up -d
 ```
 
-This starts PostgreSQL (port 5432) and Redis (port 6379).
+This starts PostgreSQL (host port 5433, mapped to container port 5432) and Redis (host port 6380, mapped to container port 6379).
 
 ### 3. Configure Environment
 
@@ -67,7 +67,7 @@ cp .env.example .env
 **Required variables**:
 
 - `DATABASE_URL` - PostgreSQL connection string
-- `REDIS_HOST`, `REDIS_PORT` - Redis connection
+- `REDIS_HOST`, `REDIS_PORT` - Redis connection (use 6380 for local dev)
 - `GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY`, `GITHUB_WEBHOOK_SECRET` - GitHub App credentials
 - `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` - GitHub OAuth credentials
 - `NEXTAUTH_URL`, `NEXTAUTH_SECRET` - NextAuth configuration

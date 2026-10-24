@@ -4,7 +4,7 @@
   "private": true,
   "description": "AI-powered GitHub documentation sync tool",
   "scripts": {
-    "dev": "pnpm --filter \"./apps/**\" dev",
+    "dev": "pnpm --filter @livedoc-sync/shared build && pnpm --filter \"./apps/**\" dev",
     "build": "pnpm --filter \"./apps/**\" --filter \"./packages/**\" build",
     "lint": "pnpm --filter \"./apps/**\" --filter \"./packages/**\" lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
@@ -13,6 +13,7 @@
     "db:studio": "pnpm --filter @livedoc-sync/shared db:studio"
   },
   "devDependencies": {
+    "@types/node": "^20.19.31",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.57.0",

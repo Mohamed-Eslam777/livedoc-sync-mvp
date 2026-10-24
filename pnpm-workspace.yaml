@@ -1,3 +1,13 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
+
+ignoredBuiltDependencies:
+  - msgpackr-extract
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - esbuild
+  - prisma
